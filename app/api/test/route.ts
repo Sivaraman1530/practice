@@ -1,13 +1,8 @@
-
-
+import postgres from 'postgres'
+const DATABASE_URL = "postgres://try:try@localhost:5432/player";
+export const sql = postgres(DATABASE_URL)
 
 export async function GET() {
-
-  
-
-  return new Response(JSON.stringify({ data: ["siva", 2, 3, 4, 5] }), {
-    headers: { 
-      'Access-Control-Allow-Origin': 'http://localhost:3001', // Allow requests from this origin
-     },
-  })
+  const res=await sql`select * from cars`
+  return Response.json(  res)
 }
