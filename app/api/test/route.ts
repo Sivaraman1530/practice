@@ -1,8 +1,11 @@
-import postgres from 'postgres'
-const DATABASE_URL = "postgres://try:try@localhost:5432/player";
-export const sql = postgres(DATABASE_URL)
+import { sql } from "@/app/db"
 
 export async function GET() {
   const res=await sql`select * from cars`
-  return Response.json(  res)
+
+  return new Response(  JSON.stringify(res), {
+    headers: { 
+      'Access-Control-Allow-Origin': 'http://localhost:3001', // Allow requests from this origin
+     },
+  })
 }
